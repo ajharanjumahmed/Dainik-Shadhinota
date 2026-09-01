@@ -1,0 +1,975 @@
+/* =============================================================
+   Khobor — Main Stylesheet
+   Newspaper editorial design. Color/typography via CSS variables.
+   ============================================================= */
+
+/* ---------- 1. Reset & base ---------- */
+
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+	margin: 0;
+	font-family: 'Noto Serif Bengali', system-ui, sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+	color: var(--khobor-text, #222);
+	background: var(--khobor-bg, #fff);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: var(--khobor-primary, #c8102e); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Noto Serif Bengali', sans-serif;
+	font-weight: 700;
+	font-synthesis: weight;
+	line-height: 1.25;
+	margin: 0 0 .5em;
+	color: var(--khobor-secondary, #1a1a1a);
+}
+.screen-reader-text {
+	position: absolute !important;
+	clip: rect(1px,1px,1px,1px);
+	width: 1px; height: 1px;
+	overflow: hidden;
+}
+.khobor-skip-link {
+	position: absolute;
+	top: -100px;
+	left: 0;
+	background: var(--khobor-primary);
+	color: #fff;
+	padding: 10px 20px;
+	z-index: 1000;
+}
+.khobor-skip-link:focus { top: 0; }
+
+/* ---------- 2. Layout ---------- */
+.khobor-container {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+.khobor-page { min-height: 100vh; display: flex; flex-direction: column; }
+.khobor-main { flex: 1; padding: 24px 0; }
+
+.khobor-layout {
+	display: grid;
+	gap: 32px;
+	grid-template-columns: 1fr;
+}
+@media (min-width: 992px) {
+	.khobor-layout--right { grid-template-columns: minmax(0,1fr) 320px; }
+	.khobor-layout--left  { grid-template-columns: 320px minmax(0,1fr); }
+	.khobor-layout--left .khobor-sidebar { order: -1; }
+	.khobor-layout--none  { grid-template-columns: minmax(0,1fr); }
+}
+
+.khobor-grid { display: grid; gap: 24px; }
+.khobor-grid--2 { grid-template-columns: 1fr; }
+.khobor-grid--3 { grid-template-columns: 1fr; }
+.khobor-grid--4 { grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+	.khobor-grid--2 { grid-template-columns: repeat(2, 1fr); }
+	.khobor-grid--3 { grid-template-columns: repeat(2, 1fr); }
+	.khobor-grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 992px) {
+	.khobor-grid--3 { grid-template-columns: repeat(3, 1fr); }
+	.khobor-grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- 3. Top bar ---------- */
+.khobor-topbar {
+	background: var(--khobor-secondary, #1a1a1a);
+	color: rgba(255,255,255,.86);
+	font-size: 13px;
+	position: relative;
+}
+.khobor-topbar__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 38px;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.khobor-topbar__date { font-weight: 500; letter-spacing: .01em; }
+.khobor-topbar__menu { list-style: none; padding: 0; margin: 0; display: flex; gap: 14px; }
+.khobor-topbar__menu a { color: rgba(255,255,255,.86); font-size: 13px; }
+.khobor-topbar__menu a:hover { color: #fff; }
+.khobor-topbar__social { display: flex; align-items: center; gap: 8px; }
+.khobor-social {
+	width: 26px; height: 26px;
+	display: inline-flex;
+	align-items: center; justify-content: center;
+	background: rgba(255,255,255,.08);
+	color: #fff;
+	border-radius: 50%;
+	font-size: 11px;
+	transition: background .15s;
+}
+.khobor-social:hover { background: var(--khobor-primary, #c8102e); text-decoration: none; }
+.khobor-search-toggle, .khobor-darkmode-toggle {
+	background: transparent;
+	border: 0;
+	color: #fff;
+	padding: 4px;
+	line-height: 0;
+}
+.khobor-search-panel {
+	position: absolute;
+	left: 0; right: 0;
+	top: 100%;
+	background: var(--khobor-secondary, #1a1a1a);
+	padding: 16px 0;
+	z-index: 20;
+	border-top: 1px solid rgba(255,255,255,.1);
+}
+.khobor-search-panel[hidden] { display: none; }
+.khobor-search-panel input { width: 100%; }
+
+/* ---------- 4. Logo area ---------- */
+.khobor-logo-area {
+	background: var(--khobor-bg, #fff);
+	border-bottom: 1px solid #eee;
+	padding: 10px 0;
+}
+.khobor-logo-area__inner {
+	display: flex;
+	align-items: center;
+	position: relative;
+	min-height: 60px;
+}
+.khobor-branding {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.custom-logo { max-height: 50px; width: auto; display: block; }
+.khobor-site-title {
+	font-size: 36px;
+	font-weight: 800;
+	color: var(--khobor-primary, #c8102e);
+	letter-spacing: -.02em;
+}
+.khobor-site-title-link:hover { text-decoration: none; }
+.khobor-site-description { margin: 4px 0 0; font-size: 13px; color: var(--khobor-muted); }
+.khobor-logo-area__ad {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	max-width: 728px;
+	min-height: 1px;
+}
+
+/* ---------- 5. Main nav ---------- */
+.khobor-mainnav {
+	background: var(--khobor-primary, #c8102e);
+	color: #fff;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	box-shadow: 0 1px 0 rgba(0,0,0,.08);
+}
+.khobor-mainnav__inner {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.khobor-menu-toggle {
+	display: inline-flex;
+	flex-direction: column;
+	gap: 4px;
+	background: transparent;
+	border: 0;
+	padding: 14px 8px;
+}
+.khobor-menu-toggle__bar { width: 22px; height: 2px; background: #fff; display: block; }
+.khobor-mainnav__menu { flex: 1; }
+.khobor-nav {
+	display: none;
+	list-style: none;
+	padding: 0; margin: 0;
+}
+@media (min-width: 768px) {
+	.khobor-menu-toggle { display: none; }
+	.khobor-nav { display: flex; flex-wrap: wrap; }
+}
+.khobor-mainnav__menu.is-open .khobor-nav {
+	display: block;
+	position: absolute;
+	left: 0; right: 0;
+	top: 100%;
+	background: var(--khobor-primary, #c8102e);
+	padding: 8px 0;
+	box-shadow: 0 8px 16px rgba(0,0,0,.15);
+}
+.khobor-nav > li { position: relative; }
+.khobor-nav > li > a {
+	display: block;
+	color: #fff;
+	padding: 14px 16px;
+	font-weight: 500;
+	font-size: 15px;
+	transition: background .15s;
+}
+.khobor-nav > li > a:hover,
+.khobor-nav > li.current-menu-item > a {
+	background: rgba(0,0,0,.18);
+	text-decoration: none;
+}
+.khobor-nav .sub-menu, .khobor-nav .khobor-submenu {
+	list-style: none;
+	padding: 0; margin: 0;
+	display: none;
+	background: #fff;
+	min-width: 220px;
+	box-shadow: 0 6px 24px rgba(0,0,0,.12);
+	border-top: 3px solid var(--khobor-accent, #f7b500);
+}
+.khobor-nav .sub-menu a { color: var(--khobor-text); padding: 10px 14px; display: block; }
+.khobor-nav .sub-menu a:hover { background: var(--khobor-surface); }
+@media (min-width: 768px) {
+	.khobor-nav .sub-menu, .khobor-nav .khobor-submenu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 200;
+	}
+}
+.khobor-nav li:hover > .sub-menu,
+.khobor-nav li:focus-within > .sub-menu,
+.khobor-nav li:hover > .khobor-submenu,
+.khobor-nav li:focus-within > .khobor-submenu { display: block; }
+.khobor-caret { font-size: 11px; opacity: .8; margin-left: 2px; }
+.khobor-epaper-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #ffffff;
+	padding: 14px 12px;
+	font-weight: 600;
+}
+.khobor-epaper-link:hover { text-decoration: none; color:var(--khobor-accent, #f7b500); }
+
+/* ---------- 6. Ticker ---------- */
+.khobor-ticker {
+	display: flex;
+	align-items: center;
+	background: var(--khobor-surface, #f8fafc);
+	border-bottom: 1px solid #eee;
+	padding: 8px 16px;
+	gap: 12px;
+	overflow: hidden;
+}
+.khobor-ticker__label {
+	background: var(--khobor-primary, #c8102e);
+	color: #fff;
+	padding: 4px 10px;
+	font-weight: 700;
+	font-size: 13px;
+	border-radius: 3px;
+	flex: 0 0 auto;
+	letter-spacing: .04em;
+}
+.khobor-ticker__viewport {
+	flex: 1;
+	overflow: hidden;
+	position: relative;
+}
+.khobor-ticker__track {
+	list-style: none;
+	padding: 0; margin: 0;
+	display: flex;
+	gap: 32px;
+	white-space: nowrap;
+	animation: khobor-ticker-scroll 20s linear infinite;
+}
+.khobor-ticker:hover .khobor-ticker__track,
+.khobor-ticker.is-paused .khobor-ticker__track { animation-play-state: paused; }
+.khobor-ticker__item a {
+	color: var(--khobor-text);
+	font-size: 14px;
+	font-weight: 500;
+}
+.khobor-ticker__item a:hover { color: var(--khobor-primary); }
+.khobor-ticker__pause {
+	background: transparent;
+	border: 0;
+	color: var(--khobor-muted);
+	flex: 0 0 auto;
+}
+@keyframes khobor-ticker-scroll {
+	0%   { transform: translateX(0); }
+	100% { transform: translateX(-50%); }
+}
+/* Hide the ticker on mobile. */
+@media (max-width: 767px) {
+	.khobor-ticker { display: none; }
+}
+
+/* ---------- 7. Breadcrumb ---------- */
+.khobor-breadcrumb-wrap { padding: 12px 0; }
+.khobor-breadcrumb ol {
+	list-style: none;
+	padding: 0; margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	font-size: 13px;
+	color: var(--khobor-muted);
+}
+.khobor-breadcrumb li:not(:last-child)::after {
+	content: '›';
+	margin: 0 6px;
+	color: var(--khobor-muted);
+}
+
+/* ---------- 8. Section titles ---------- */
+.khobor-section-title {
+	font-size: 22px;
+	font-weight: 700;
+	margin: 0 0 16px;
+	color: var(--khobor-secondary);
+}
+.khobor-section-title--bar {
+	border-bottom: 2px solid var(--khobor-primary);
+	padding-bottom: 8px;
+	position: relative;
+	display: flex;
+	align-items: baseline;
+}
+.khobor-section-title--bar::before {
+	content: '';
+	display: inline-block;
+	width: 4px;
+	height: 22px;
+	background: var(--khobor-primary);
+	margin-right: 10px;
+	transform: translateY(3px);
+}
+
+/* ---------- 9. Cards ---------- */
+.khobor-card { position: relative; }
+.khobor-card__media {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	background: #f1f5f9;
+	border-radius: 4px;
+}
+.khobor-card__media img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	transition: transform .35s ease;
+}
+.khobor-card:hover .khobor-card__media img { transform: scale(1.04); }
+.khobor-card__cat-badge {
+	position: absolute;
+	top: 10px; left: 10px;
+	background: var(--khobor-primary);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 2px;
+}
+.khobor-card__cat-badge--lead { font-size: 13px; padding: 6px 14px; }
+.khobor-card__body { padding: 12px 0; }
+.khobor-card__title {
+	font-size: 17px;
+	font-weight: 700;
+	line-height: 1.4;
+	margin: 0 0 8px;
+}
+.khobor-card__title a { color: var(--khobor-secondary); }
+.khobor-card__title a:hover { color: var(--khobor-primary); text-decoration: none; }
+.khobor-card__title--lead { font-size: 28px; line-height: 1.25; }
+.khobor-card__title--list { font-size: 14px; line-height: 1.4; margin: 0; }
+.khobor-card__excerpt { font-size: 14px; color: var(--khobor-muted); margin: 0 0 8px; }
+.khobor-card__excerpt--lead { font-size: 16px; }
+/* Smaller excerpt text on mobile. */
+@media (max-width: 767px) {
+	.khobor-card__excerpt { font-size: 13px; line-height: 1.5; }
+	.khobor-card__excerpt--lead { font-size: 14px; }
+}
+.khobor-card__meta {
+	font-size: 12px;
+	color: var(--khobor-muted);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+.khobor-card__sep { opacity: .5; }
+.khobor-card--list {
+	display: flex;
+	gap: 12px;
+	padding: 8px 0;
+	border-bottom: 1px dashed #e5e7eb;
+}
+.khobor-card--list:last-child { border-bottom: 0; }
+.khobor-card--list .khobor-card__media--sq {
+	flex: 0 0 80px;
+	width: 80px; height: 80px;
+}
+.khobor-card--list .khobor-card__media--sq img {
+	aspect-ratio: 1;
+	width: 100%; height: 100%;
+	object-fit: cover;
+}
+
+/* ---------- 10. Lead/homepage ---------- */
+.khobor-lead { margin: 0 0 32px; }
+.khobor-lead__grid {
+	display: grid;
+	gap: 24px;
+	grid-template-columns: 1fr;
+}
+@media (min-width: 992px) {
+	.khobor-lead__grid {
+		grid-template-columns: minmax(0,1.5fr) minmax(0,1fr);
+	}
+}
+.khobor-lead__secondary {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+@media (max-width: 640px) {
+	.khobor-lead__secondary { grid-template-columns: 1fr; }
+}
+.khobor-home-layout {
+	display: grid;
+	gap: 32px;
+}
+@media (min-width: 992px) {
+	.khobor-home-layout { grid-template-columns: minmax(0,1fr) 320px; }
+}
+.khobor-cat-block { margin: 32px 0; }
+.khobor-cat-block .khobor-grid { margin-top: 20px; }
+.khobor-cat-block__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	padding-bottom: 12px;
+	position: relative;
+}
+.khobor-cat-block__header::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--khobor-primary);
+}
+.khobor-cat-block__header .khobor-section-title--bar {
+	border-bottom: none;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+.khobor-cat-block__all { font-size: 13px; color: var(--khobor-muted); }
+
+/* ---------- 11. Most-read ---------- */
+.khobor-most-read__list {
+	list-style: none;
+	padding: 0; margin: 0;
+	counter-reset: kr;
+}
+.khobor-most-read__item {
+	display: flex;
+	gap: 12px;
+	padding: 12px 0;
+	border-bottom: 1px solid #eee;
+	align-items: flex-start;
+}
+.khobor-most-read__item:last-child { border-bottom: 0; }
+.khobor-most-read__rank {
+	font-size: 26px;
+	font-weight: 800;
+	color: var(--khobor-primary);
+	line-height: 1;
+	flex: 0 0 36px;
+}
+.khobor-most-read__link {
+	color: var(--khobor-secondary);
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.4;
+}
+.khobor-most-read__link:hover { color: var(--khobor-primary); }
+
+/* ---------- 12. Sidebar ---------- */
+.khobor-sidebar { display: flex; flex-direction: column; gap: 24px; }
+.khobor-widget {
+	background: var(--khobor-surface, #f8fafc);
+	border-radius: 6px;
+	padding: 18px;
+}
+.khobor-widget__title, .widget-title {
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0 0 14px;
+	border-bottom: 2px solid var(--khobor-primary);
+	padding-bottom: 8px;
+	color: var(--khobor-secondary);
+}
+.khobor-widget ul { list-style: none; padding: 0; margin: 0; }
+.khobor-widget li { padding: 6px 0; border-bottom: 1px dotted #d1d5db; }
+.khobor-widget li:last-child { border-bottom: 0; }
+.khobor-widget a { color: var(--khobor-text); }
+.khobor-widget a:hover { color: var(--khobor-primary); }
+
+/* ---------- 13. Single article ---------- */
+.khobor-article { max-width: 760px; margin: 0 auto 32px; }
+.khobor-cat-badge {
+	display: inline-block;
+	background: var(--khobor-primary);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 4px 12px;
+	border-radius: 3px;
+	margin-bottom: 12px;
+}
+.khobor-cat-badge:hover { color: #fff; text-decoration: none; opacity: .92; }
+.khobor-article__title {
+	font-size: 34px;
+	line-height: 1.25;
+	margin: 0 0 14px;
+}
+@media (max-width: 640px) {
+	.khobor-article__title { font-size: 26px; }
+}
+.khobor-article__excerpt {
+	font-size: 18px;
+	color: var(--khobor-muted);
+	line-height: 1.5;
+	font-weight: 500;
+	margin: 0 0 16px;
+}
+.khobor-article__meta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	padding: 14px 0;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	margin: 0 0 24px;
+}
+.khobor-article__meta-left { display: flex; gap: 12px; align-items: center; }
+.khobor-article__avatar { border-radius: 50%; }
+.khobor-article__byline { font-size: 13px; }
+.khobor-article__byline .khobor-post-author { font-weight: 600; color: var(--khobor-secondary); }
+.khobor-article__meta-row {
+	display: flex; gap: 8px; align-items: center;
+	color: var(--khobor-muted);
+	font-size: 13px;
+	margin-top: 2px;
+	flex-wrap: wrap;
+}
+.khobor-meta-sep { opacity: .5; }
+.khobor-reading-time { display: inline-flex; align-items: center; gap: 4px; }
+.khobor-article__hero { margin: 0 0 24px; }
+.khobor-article__hero img { width: 100%; height: auto; border-radius: 4px; }
+.khobor-article__hero figcaption { font-size: 13px; color: var(--khobor-muted); text-align: center; padding-top: 6px; }
+.khobor-article__body {
+	font-size: 17px;
+	line-height: 1.85;
+	color: var(--khobor-text);
+}
+.khobor-article__body p { margin: 0 0 1.2em; }
+.khobor-article__body h2 { font-size: 24px; margin-top: 1.8em; }
+.khobor-article__body h3 { font-size: 20px; margin-top: 1.5em; }
+.khobor-article__body img { border-radius: 4px; margin: 1em 0; }
+.khobor-article__body blockquote {
+	border-left: 4px solid var(--khobor-primary);
+	padding: 12px 20px;
+	margin: 1.5em 0;
+	background: var(--khobor-surface);
+	font-style: italic;
+}
+.khobor-article__body a { color: var(--khobor-primary); text-decoration: underline; }
+.khobor-article__footer { padding: 20px 0; }
+.khobor-article__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; align-items: center; }
+.khobor-article__tags-label { font-size: 13px; color: var(--khobor-muted); margin-right: 4px; }
+.khobor-tag-pill {
+	display: inline-block;
+	background: var(--khobor-surface);
+	color: var(--khobor-text);
+	font-size: 12px;
+	padding: 4px 10px;
+	border-radius: 12px;
+	transition: background .15s;
+}
+.khobor-tag-pill:hover { background: var(--khobor-primary); color: #fff; text-decoration: none; }
+
+/* ---------- 14. Font size adjuster (body class hooks) ---------- */
+.khobor-font-sizer {
+	display: inline-flex;
+	gap: 4px;
+	align-items: center;
+	font-size: 13px;
+}
+.khobor-font-sizer__label { color: var(--khobor-muted); margin-right: 4px; }
+.khobor-font-sizer__btn {
+	background: var(--khobor-surface);
+	border: 1px solid #e5e7eb;
+	border-radius: 3px;
+	padding: 4px 10px;
+	min-width: 32px;
+	font-weight: 600;
+}
+.khobor-font-sizer__btn:hover { background: var(--khobor-primary); color: #fff; border-color: var(--khobor-primary); }
+.khobor-font-sizer__btn.is-active { background: var(--khobor-primary); color: #fff; }
+.khobor-font-size-sm .khobor-article__body { font-size: 15px; }
+.khobor-font-size-md .khobor-article__body { font-size: 17px; }
+.khobor-font-size-lg .khobor-article__body { font-size: 19px; }
+.khobor-font-size-xl .khobor-article__body { font-size: 21px; line-height: 1.9; }
+
+/* ---------- 15. Share buttons ---------- */
+.khobor-share {
+	display: inline-flex;
+	gap: 8px;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 0 12px 0 0;
+}
+.khobor-share__label {
+	font-size: 13px;
+	color: var(--khobor-muted);
+	margin-right: 4px;
+}
+.khobor-share__btn {
+	width: 34px; height: 34px;
+	display: inline-flex;
+	align-items: center; justify-content: center;
+	background: var(--khobor-surface);
+	border: 0;
+	border-radius: 50%;
+	font-weight: 700;
+	color: var(--khobor-secondary);
+	transition: all .15s;
+	text-transform: uppercase;
+	padding: 0;
+}
+/* Brand marks inherit the button colour via fill="currentColor". */
+.khobor-share__btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.khobor-share__btn:hover { background: var(--khobor-primary); color: #fff; text-decoration: none; transform: translateY(-1px); }
+.khobor-share__btn--fb:hover { background: #1877f2; }
+.khobor-share__btn--tw:hover { background: #1d9bf0; }
+.khobor-share__btn--wa:hover { background: #25d366; }
+.khobor-share__btn--tg:hover { background: #26a5e4; }
+.khobor-share__btn--copy.is-copied { background: #10b981; color: #fff; }
+
+/* ---------- 16. Photocard button ---------- */
+.khobor-photocard-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: var(--khobor-accent, #f7b500);
+	color: #1a1a1a;
+	border: 0;
+	padding: 8px 16px;
+	border-radius: 4px;
+	font-weight: 600;
+	font-size: 14px;
+	transition: all .15s;
+}
+.khobor-photocard-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+.khobor-photocard-btn.is-loading { opacity: .7; pointer-events: none; }
+.khobor-photocard-result {
+	margin-top: 16px;
+	padding: 16px;
+	background: var(--khobor-surface);
+	border-radius: 6px;
+}
+.khobor-photocard-result img {
+	max-width: 320px;
+	width: 100%;
+	border-radius: 4px;
+	box-shadow: 0 6px 24px rgba(0,0,0,.15);
+}
+.khobor-photocard-result .khobor-photocard-actions {
+	margin-top: 12px;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+/* ---------- 17. Author bio ---------- */
+.khobor-author-bio {
+	max-width: 760px;
+	margin: 28px auto;
+	background: var(--khobor-surface, #f8fafc);
+	padding: 20px;
+	border-radius: 6px;
+	border-left: 4px solid var(--khobor-primary);
+}
+.khobor-author-bio__inner { display: flex; gap: 16px; align-items: flex-start; }
+.khobor-author-bio__avatar { border-radius: 50%; }
+.khobor-author-bio__name { font-size: 18px; margin: 0 0 4px; }
+.khobor-author-bio__desc { font-size: 14px; color: var(--khobor-muted); margin: 0 0 8px; }
+.khobor-author-bio__more { font-size: 13px; font-weight: 600; }
+.khobor-author-bio__list { list-style: none; padding: 0; margin: 16px 0 0; }
+.khobor-author-bio__list li { padding: 6px 0; border-top: 1px dashed #e5e7eb; font-size: 14px; }
+
+/* ---------- 18. Related posts ---------- */
+.khobor-related { max-width: 1240px; margin: 32px auto; }
+
+/* ---------- 19. Comments ---------- */
+.khobor-comments { max-width: 760px; margin: 32px auto; }
+.khobor-comments__title { font-size: 22px; }
+.khobor-comments__list { list-style: none; padding: 0; }
+.khobor-comments__list .children { list-style: none; padding-left: 32px; }
+.khobor-comments__list .comment { padding: 16px 0; border-bottom: 1px solid #eee; }
+.khobor-comment-form textarea, .khobor-comment-form input {
+	width: 100%; padding: 8px; border: 1px solid #d1d5db; border-radius: 4px;
+	font: inherit;
+}
+
+/* ---------- 20. Ads ---------- */
+.khobor-ad {
+	margin: 16px 0;
+	padding: 12px;
+	background: var(--khobor-surface);
+	border: 1px dashed #d1d5db;
+	border-radius: 4px;
+	text-align: center;
+}
+.khobor-ad__label {
+	display: block;
+	font-size: 10px;
+	color: var(--khobor-muted);
+	text-transform: uppercase;
+	letter-spacing: .08em;
+	margin-bottom: 8px;
+}
+.khobor-ad__slot { margin: 0 auto; min-height: 1px; }
+
+/* ---------- 21. Buttons ---------- */
+.khobor-btn {
+	display: inline-flex;
+	align-items: center; justify-content: center;
+	gap: 6px;
+	padding: 10px 20px;
+	border-radius: 4px;
+	border: 0;
+	font-weight: 600;
+	font-size: 14px;
+	transition: all .15s;
+	background: var(--khobor-secondary);
+	color: #fff;
+}
+.khobor-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.12); text-decoration: none; color: #fff; }
+.khobor-btn--primary { background: var(--khobor-primary); }
+.khobor-btn--ghost {
+	background: transparent;
+	color: var(--khobor-secondary);
+	border: 1px solid #d1d5db;
+}
+.khobor-btn--ghost:hover { background: var(--khobor-surface); color: var(--khobor-secondary); }
+.khobor-latest__more { text-align: center; margin: 24px 0; }
+
+/* ---------- 22. Pagination ---------- */
+.khobor-content .nav-links, .navigation .nav-links {
+	display: flex; gap: 4px; justify-content: center; margin: 32px 0;
+	flex-wrap: wrap;
+}
+.khobor-content .page-numbers, .navigation .page-numbers {
+	display: inline-flex; align-items: center;
+	padding: 8px 14px;
+	background: var(--khobor-surface);
+	color: var(--khobor-text);
+	border-radius: 3px;
+	font-weight: 500;
+}
+.khobor-content .page-numbers.current { background: var(--khobor-primary); color: #fff; }
+.khobor-content .page-numbers:hover { background: var(--khobor-primary); color: #fff; text-decoration: none; }
+
+/* ---------- 23. Footer ---------- */
+.khobor-footer { background: var(--khobor-secondary, #1a1a1a); color: rgba(255,255,255,.86); margin-top: auto; padding-top: 40px; }
+.khobor-footer__top {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 32px;
+	padding-bottom: 32px;
+	border-bottom: 1px solid rgba(255,255,255,.1);
+}
+@media (min-width: 768px) { .khobor-footer__top { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 992px) { .khobor-footer__top { grid-template-columns: repeat(4, 1fr); } }
+.khobor-footer__col h3, .khobor-footer__col h4 { color: #fff; font-size: 15px; margin: 0 0 12px; }
+.khobor-footer__col a { color: rgba(255,255,255,.7); }
+.khobor-footer__col a:hover { color: #fff; }
+.khobor-footer__col ul { list-style: none; padding: 0; margin: 0; }
+.khobor-footer__col li { padding: 4px 0; font-size: 14px; }
+.khobor-footer__bar {
+	padding: 16px 0;
+	border-top: 1px solid rgba(255,255,255,.04);
+	font-size: 13px;
+}
+.khobor-footer__bar .khobor-container {
+	display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px 24px;
+	text-align: center;
+}
+.khobor-footer__menu { list-style: none; padding: 0; margin: 0; display: flex; gap: 14px; }
+.khobor-footer__menu a { color: rgba(255,255,255,.7); }
+
+/* ---------- 24. Search form ---------- */
+.khobor-search-form {
+	display: flex;
+	gap: 0;
+	background: #fff;
+	border-radius: 4px;
+	overflow: hidden;
+	max-width: 600px;
+}
+.khobor-search-form__input {
+	flex: 1;
+	padding: 10px 14px;
+	border: 0;
+	font: inherit;
+	color: var(--khobor-text);
+	background: #fff;
+}
+.khobor-search-form__submit {
+	background: var(--khobor-primary);
+	border: 0;
+	color: #fff;
+	padding: 0 16px;
+	cursor: pointer;
+}
+
+/* ---------- 25. 404 ---------- */
+.khobor-404 { text-align: center; padding: 60px 20px; }
+.khobor-404__code {
+	font-size: 120px;
+	font-weight: 800;
+	color: var(--khobor-primary);
+	line-height: 1;
+	margin: 0 0 12px;
+}
+.khobor-404__title { font-size: 28px; margin: 0 0 8px; }
+.khobor-404__text { color: var(--khobor-muted); margin: 0 0 24px; }
+.khobor-404 .khobor-search-form { margin: 0 auto 20px; }
+
+/* ---------- 26. E-paper flipbook ---------- */
+.khobor-epaper { padding: 24px 0; }
+.khobor-epaper__header { text-align: center; margin-bottom: 20px; }
+.khobor-epaper__title { font-size: 28px; }
+.khobor-epaper__date { color: var(--khobor-muted); }
+.khobor-flipbook-wrap { background: var(--khobor-surface); padding: 20px; border-radius: 6px; }
+/* Scroll window for the book. Without this a zoomed (CSS-scaled) flipbook
+   overflows its container and covers the controls underneath it, so the
+   page-turn and zoom-out buttons stop being clickable. */
+.khobor-flipbook__viewport {
+	overflow: auto;
+	max-width: 100%;
+	max-height: 92vh;
+	-webkit-overflow-scrolling: touch;
+	overscroll-behavior: contain;
+}
+.khobor-flipbook {
+	width: 100%;
+	min-height: 760px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center; justify-content: center;
+	/* Grow right/down only — overflow above/left of the origin is not
+	   reachable by scrolling. */
+	transform-origin: 0 0;
+}
+/* Scaling desyncs StPageFlip's pointer math from its page geometry, so hand
+   interaction to the scroll container and drive pages from the buttons. */
+.khobor-flipbook.is-zoomed { pointer-events: none; }
+.khobor-flipbook__viewport:has(.khobor-flipbook.is-zoomed) { cursor: grab; }
+.khobor-flipbook__viewport.is-panning { cursor: grabbing; user-select: none; }
+/* The PDF canvas keeps its own aspect ratio, which won't always match
+   PAGE_RATIO in flipbook.js — contain-fit it so it centres in the page frame
+   instead of top-aligning with a gap underneath. */
+.khobor-flipbook__page { background: #fff; }
+.khobor-flipbook__page canvas {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+}
+.khobor-flipbook__loading { color: var(--khobor-muted); }
+.khobor-flipbook__zoomlevel { min-width: 68px; font-variant-numeric: tabular-nums; }
+.khobor-flipbook__controls {
+	display: flex;
+	gap: 8px;
+	justify-content: center;
+	margin-top: 16px;
+	flex-wrap: wrap;
+}
+.khobor-flipbook__pageinfo {
+	display: inline-flex;
+	align-items: center;
+	padding: 0 12px;
+	font-weight: 600;
+	color: var(--khobor-muted);
+}
+
+/* ---------- 27. Prayer times widget ---------- */
+.khobor-prayer-times { padding: 0; }
+.khobor-prayer-times__city {
+	font-size: 12px;
+	color: var(--khobor-muted);
+	margin: 0 0 10px;
+}
+.khobor-prayer-times__list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+.khobor-prayer-times__row {
+	display: flex;
+	justify-content: space-between;
+	padding: 4px 0;
+	font-size: 14px;
+}
+.khobor-prayer-times__name { color: var(--khobor-text); font-weight: 500; }
+.khobor-prayer-times__time { color: var(--khobor-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- 28. Dark mode ---------- */
+body.khobor-dark {
+	--khobor-bg: #0f172a;
+	--khobor-surface: #1e293b;
+	--khobor-text: #e2e8f0;
+	--khobor-muted: #94a3b8;
+	--khobor-secondary: #f1f5f9;
+}
+body.khobor-dark .khobor-card__title a { color: #f1f5f9; }
+body.khobor-dark .khobor-card__title a:hover { color: var(--khobor-primary); }
+body.khobor-dark .khobor-logo-area { background: #0f172a; border-bottom-color: rgba(255,255,255,.1); }
+body.khobor-dark .khobor-widget li { border-bottom-color: rgba(255,255,255,.08); }
+
+/* Top bar: --khobor-secondary flips to near-white in dark mode, so pin the
+   bar to a dark surface and keep its text and icons white. */
+body.khobor-dark .khobor-topbar,
+body.khobor-dark .khobor-search-panel { background: #0b1220; }
+body.khobor-dark .khobor-topbar { color: #fff; }
+body.khobor-dark .khobor-topbar__date,
+body.khobor-dark .khobor-topbar__menu a,
+body.khobor-dark .khobor-social,
+body.khobor-dark .khobor-search-toggle,
+body.khobor-dark .khobor-darkmode-toggle { color: #fff; }
+body.khobor-dark .khobor-topbar__menu a:hover { color: #fff; opacity: .8; }
+body.khobor-dark .khobor-social { background: rgba(255,255,255,.12); }
+body.khobor-dark .khobor-social:hover { background: var(--khobor-primary); color: #fff; }
+body.khobor-dark .khobor-search-panel { border-top-color: rgba(255,255,255,.12); }
+
+/* ---------- 29. Misc ---------- */
+.khobor-no-results { padding: 40px 20px; text-align: center; }
+.khobor-page-links { margin: 1em 0; }
+.khobor-page__hero { margin: 0 0 24px; }
+.khobor-page__title { font-size: 32px; margin-bottom: 16px; }

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check assets/js/flipbook.js)",
+      "Bash(php -l inc/photocard.php)",
+      "Bash(php -l inc/bangla-numbers.php)",
+      "Bash(php render-test.php)",
+      "Bash(php -d error_reporting=\"E_ALL & ~E_DEPRECATED\" render-test.php)",
+      "Bash(php -r ' *)"
+    ]
+  }
+}

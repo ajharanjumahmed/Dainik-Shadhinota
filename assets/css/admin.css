@@ -1,0 +1,14 @@
+/* Khobor — Admin styles. Light tweaks for the ad-zones page
+   and any other custom admin screens. */
+
+.khobor-admin-page .form-table th {
+	width: 280px;
+	vertical-align: top;
+	padding-top: 16px;
+}
+.khobor-admin-page .form-table textarea {
+	font-family: Menlo, Monaco, 'Courier New', monospace;
+	font-size: 12px;
+	background: #fafafa;
+}
+.khobor-media-pick { margin-top: 6px; }

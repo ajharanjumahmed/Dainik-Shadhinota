@@ -1,0 +1,157 @@
+# Khobor theme translation template.
+# Copyright (C) 2026 Khobor
+# This file is distributed under the GNU General Public License v2 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Khobor 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-11 12:00+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Manual stub for Khobor 1.0.0\n"
+
+# To populate this file with every string in the theme, run:
+#   wp i18n make-pot . languages/khobor.pot --domain=khobor
+# from the theme directory. The strings below are a starter set; the full
+# theme contains roughly 80 unique translatable strings.
+
+msgid "Skip to content"
+msgstr ""
+
+msgid "Set up a menu"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Toggle dark mode"
+msgstr ""
+
+msgid "Toggle menu"
+msgstr ""
+
+msgid "Generate Photocard"
+msgstr ""
+
+msgid "Adjust font size"
+msgstr ""
+
+msgid "Smaller font"
+msgstr ""
+
+msgid "Reset font"
+msgstr ""
+
+msgid "Larger font"
+msgstr ""
+
+msgid "Pause ticker"
+msgstr ""
+
+msgid "Search for:"
+msgstr ""
+
+msgid "Khobor Theme"
+msgstr ""
+
+msgid "Brand Colors"
+msgstr ""
+
+msgid "Layout & Features"
+msgstr ""
+
+msgid "Photocard Generator"
+msgstr ""
+
+msgid "Prayer Times"
+msgstr ""
+
+msgid "Social Links"
+msgstr ""
+
+msgid "Primary Menu (Main Nav)"
+msgstr ""
+
+msgid "Top Bar Menu"
+msgstr ""
+
+msgid "Footer Menu"
+msgstr ""
+
+msgid "Mobile Menu (optional)"
+msgstr ""
+
+msgid "Primary Sidebar"
+msgstr ""
+
+msgid "Homepage Top"
+msgstr ""
+
+msgid "Homepage Bottom"
+msgstr ""
+
+msgid "Load More"
+msgstr ""
+
+msgid "Loading…"
+msgstr ""
+
+msgid "No more posts"
+msgstr ""
+
+msgid "Generating photocard…"
+msgstr ""
+
+msgid "Photocard ready"
+msgstr ""
+
+msgid "Could not generate photocard"
+msgstr ""
+
+msgid "E-Papers"
+msgstr ""
+
+msgid "E-Paper"
+msgstr ""
+
+msgid "Add New E-Paper"
+msgstr ""
+
+msgid "Edit E-Paper"
+msgstr ""
+
+msgid "Khobor: Popular Posts"
+msgstr ""
+
+msgid "Khobor: Latest Posts"
+msgstr ""
+
+msgid "Khobor: Prayer Times"
+msgstr ""
+
+msgid "Khobor: Category Posts"
+msgstr ""
+
+msgid "Khobor: Ad Zone"
+msgstr ""
+
+msgid "Title:"
+msgstr ""
+
+msgid "Number of posts:"
+msgstr ""
+
+msgid "Khobor Ad Zones"
+msgstr ""
+
+msgid "Save Ad Zones"
+msgstr ""
+
+msgid "Ad zones saved."
+msgstr ""

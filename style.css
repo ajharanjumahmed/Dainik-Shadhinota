@@ -1,0 +1,20 @@
+/*
+Theme Name:        Khobor
+Theme URI:         https://example.com/khobor
+Author:            Khobor Team
+Author URI:        https://example.com
+Description:       A high-performance, SEO-optimized Bangla newspaper theme with built-in photocard generator, e-paper flipbook, prayer times widget, dynamic category sections, custom ad zones, and full Elementor + Gutenberg compatibility. Designed for heavy-traffic news publishing.
+Version:           1.0.0
+Requires at least: 6.0
+Tested up to:      6.6
+Requires PHP:      7.4
+License:           GNU General Public License v2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:       khobor
+Domain Path:       /languages
+Tags:              news, blog, custom-logo, custom-menu, custom-colors, featured-images, threaded-comments, translation-ready, rtl-language-support, two-columns, right-sidebar, full-width-template, theme-options, block-styles, wide-blocks
+*/
+
+/* All theme styles live in assets/css/main.css.
+   This file exists only for the WordPress theme header.
+   Do not add styles here. */

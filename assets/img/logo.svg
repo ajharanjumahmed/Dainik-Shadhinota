@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" role="img" aria-label="Khobor">
+	<rect x="0" y="0" width="300" height="80" fill="#ffffff"/>
+	<rect x="0" y="0" width="6" height="80" fill="#c8102e"/>
+	<text x="22" y="52"
+	      font-family="'Hind Siliguri','Noto Sans Bengali',sans-serif"
+	      font-size="40"
+	      font-weight="800"
+	      fill="#1a1a1a"
+	      letter-spacing="-1">Khobor</text>
+	<rect x="22" y="60" width="80" height="3" fill="#f7b500"/>
+</svg>
